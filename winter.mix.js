@@ -21,6 +21,7 @@ mix
             'babel-loader',
             'css-loader',
             'jquery-events-to-dom-events',
+            'luxon',
             'style-loader',
             'vue',
             'vue-loader',

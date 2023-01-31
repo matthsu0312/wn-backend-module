@@ -156,8 +156,8 @@ class Backend
         }
 
         $attributes = [
-            'datetime' => $carbon,
-            'data-datetime-control' => 1,
+            'data-datetime' => $carbon,
+            'data-control' => 'datetime',
         ];
 
         if ($ignoreTimezone) {
