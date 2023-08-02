@@ -9,9 +9,9 @@ class SeedSetupAdmin extends Seeder
 {
     public static $email = 'admin@example.com';
     public static $login = 'admin';
-    public static $password = '';
+    public static $password = 'admin';
     public static $firstName = 'Admin';
-    public static $lastName = 'Person';
+    public static $lastName = 'Greattree X WinterCMS';
 
     public function setDefaults($values)
     {
@@ -25,16 +25,16 @@ class SeedSetupAdmin extends Seeder
 
     public function run()
     {
-        UserRole::create([
-            'name' => 'Publisher',
+        $publisher_role = UserRole::create([
+            'name' => '文章管理者',
             'code' => UserRole::CODE_PUBLISHER,
-            'description' => 'Site editor with access to publishing tools.',
+            'description' => 'Site editor with access to publishing tools. 系統預設:權限無法另外調整 ',
         ]);
 
-        $role = UserRole::create([
-            'name' => 'Developer',
+        $developer_role = UserRole::create([
+            'name' => '網站開發人員',
             'code' => UserRole::CODE_DEVELOPER,
-            'description' => 'Site administrator with access to developer tools.',
+            'description' => 'Site administrator with access to developer tools. 系統預設:權限無法另外調整 ',
         ]);
 
         $group = UserGroup::create([
@@ -54,9 +54,23 @@ class SeedSetupAdmin extends Seeder
             'permissions'           => [],
             'is_superuser'          => true,
             'is_activated'          => true,
-            'role_id'               => $role->id
+            'role_id'               => $developer_role->id
+        ]);
+        $user->addGroup($group);
+
+        $user2 = User::create([
+            'email'                 => 'user01@exmaple.com',
+            'login'                 => 'user01',
+            'password'              => 'user01',
+            'password_confirmation' => 'user01',
+            'first_name'            => 'User01',
+            'last_name'             => 'website default',
+            'permissions'           => [],
+            'is_superuser'          => false,
+            'is_activated'          => true,
+            'role_id'               => $publisher_role->id
         ]);
 
-        $user->addGroup($group);
+        $user2->addGroup($group);
     }
 }

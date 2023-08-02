@@ -55,16 +55,16 @@ class DbBackendUserRoles extends Migration
     protected function createSystemUserRoles()
     {
         Db::table('backend_user_roles')->insert([
-            'name' => 'Publisher',
+            'name' => '文章管理者',
             'code' => UserRole::CODE_PUBLISHER,
-            'description' => 'Site editor with access to publishing tools.',
+            'description' => 'Site editor with access to publishing tools. 系統預設:權限無法另外調整 ',
         ]);
 
         Db::table('backend_user_roles')->insert([
-            'name' => 'Developer',
+            'name' => '網站開發人員',
             'code' => UserRole::CODE_DEVELOPER,
-            'description' => 'Site administrator with access to developer tools.',
-        ]);
+            'description' => 'Site administrator with access to developer tools. 系統預設:權限無法另外調整 ',
+        ]);   
     }
 
     protected function migratePermissionsFromGroupsToRoles()
